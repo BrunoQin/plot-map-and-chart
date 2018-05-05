@@ -53,8 +53,8 @@ def plot_ssta(da, ax=None, shift=True):
     return m
 
 
-fig = plt.figure(0, (14, 8))
-grid = ImageGrid(fig, 111, nrows_ncols=(3, 4), axes_pad=0.4, cbar_mode='single', cbar_location="right")
+fig = plt.figure(0, (20, 8))
+grid = ImageGrid(fig, 111, nrows_ncols=(3, 4), axes_pad=0.5, cbar_mode='single', cbar_location="right")
 for i in range(12):
     plt.sca(grid[i])
     plot_ssta(data_s[i] - data_n[i])
@@ -62,5 +62,8 @@ for i in range(12):
 
 plt.colorbar(cax=grid[0].cax, orientation="vertical")
 plt.suptitle("SSTA Development")
-plt.tight_layout()
+# plt.tight_layout()
+plot_margin = 0.25
+x0, x1, y0, y1 = plt.axis()
+plt.axis((x0 - plot_margin, x1 + plot_margin, y0 - plot_margin, y1 + plot_margin))
 plt.show()
