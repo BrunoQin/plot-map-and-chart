@@ -57,7 +57,7 @@ fig = plt.figure(0, (20, 8))
 grid = ImageGrid(fig, 111, nrows_ncols=(3, 4), axes_pad=0.5, cbar_mode='single', cbar_location="right")
 for i in range(12):
     plt.sca(grid[i])
-    plot_ssta(data_s[i] - data_n[i])
+    plot_ssta(data_n[i] - data_s[i])
     plt.title(MONTHS[i+1])
 
 plt.colorbar(cax=grid[0].cax, orientation="vertical")

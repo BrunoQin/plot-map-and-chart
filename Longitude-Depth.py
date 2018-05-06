@@ -2,12 +2,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import netCDF4
 
-file = netCDF4.Dataset('/Users/Bruno/Desktop/ocean_temp_salt_6.nc')
-lat = file.variables['yaxis_1'][:]
-lon = file.variables['xaxis_1'][:]
-data = file.variables['temp'][0, 0:11, 95:105, :]
-file.close()
+file_n = netCDF4.Dataset('/Users/Bruno/Desktop/3_29_ocean.nc')
+lat_n = file_n.variables['yt_ocean'][:]
+lon_n = file_n.variables['xt_ocean'][:]
+data_n = file_n.variables['temp'][:, 0:11, 95:105, :]
+file_n.close()
 
+file_s = netCDF4.Dataset('/Users/Bruno/Desktop/00610101.ocean_month.nc')
+lat_s = file_s.variables['yt_ocean'][:]
+lon_s = file_s.variables['xt_ocean'][:]
+data_s = file_s.variables['temp'][:, 0:11, 95:105, :]
+file_s.close()
+
+data = data_n[11] - data_s[24+11]
 data[data == 0] = 'nan'
 
 final = np.mean(data, axis=1)
