@@ -2,9 +2,9 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
 begin
-f=addfile("/Users/Bruno/Desktop/4_21_origin.nc","r")    ;目标函数表现最好的粒子
-g=addfile("/Users/Bruno/Desktop/ocean_temp_salt.res.nc","r")      ;原始文件
-h=addfile("/Users/Bruno/Desktop/00610101.ocean_month.nc","r")
+f=addfile("2_9_origin.nc","r")    ;目标函数表现最好的粒子
+g=addfile("ocean_temp_salt.res.nc","r")      ;原始文件
+h=addfile("../output/00510101.ocean_month.nc","r")
 ;t1=f->temp(:,0:20,95:96,0:219)
 ;t2=g->temp(0:11,0:20,95:96,0:219)   ;0.5°南北纬平均
 t1=f->temp(0,0:20,83:108,0:219)
