@@ -14,7 +14,7 @@
 
 begin
 ;---Open file
-    fname = "../3_29_ocean.nc"
+    fname = "../9_15_ocean.nc"
     f     = addfile(fname,"r")
     fname_ave = "/BIGDATA1/iocas_mmu_2/GFDL-CM2p1/output/00610101.ocean_month.nc"
     f_ave     = addfile(fname_ave,"r")
@@ -44,7 +44,7 @@ begin
     t_ave   = f_ave->sst
     t_ave@units = "degC"
 ;---Start the graphics
-    wks  = gsn_open_wks("png","panel")         ; send graphics to PNG file
+    wks  = gsn_open_wks("png","panel6")         ; send graphics to PNG file
 
     res                     = True
     res@gsnDraw             = False
