@@ -49,7 +49,7 @@ begin
 
     res@tiYAxisOn           = True
     res@tiYAxisString       = "Depth"
-    res@tiYAxisFontHeightF  = 0.05             ;Y轴名称字体大小
+    res@tiYAxisFontHeightF  = 0.02             ;Y轴名称字体大小
     res@trYReverse          = True             ;把纵轴倒过来，深度从小到大
     res@tmXBLabelFontHeightF= 0.02    ;XY轴坐标标注字体大小
     res@tmYLLabelFontHeightF= 0.02
