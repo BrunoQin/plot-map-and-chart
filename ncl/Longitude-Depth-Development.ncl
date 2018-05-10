@@ -19,43 +19,23 @@ begin
     fname_ave = "/BIGDATA1/iocas_mmu_2/GFDL-CM2p1/output/00610101.ocean_month.nc"
     f_ave     = addfile(fname_ave, "r")
 
-;---Convert "time" to an ntim x 6 array of year,mon,day,hour,min,sec
-;    newtime = cd_calendar(f->time,0)
-;    years   = newtime(:,0)
-;    months  = newtime(:,1)
-
-    newtime = cd_calendar(f->time, 0)
-    months  = newtime(:,1)
-    start_months = (/1,2,3,4,5,6/)
-    end_months   = (/7,8,9,10,11,12/)
-    nmonths      = dimsizes(start_months)
-    month_abbr = (/"","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep", \
+    month_abbr = (/"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep", \
                     "Oct","Nov","Dec"/)
-;---Indicate start and end years of interest. Best to only do 1 or 2 here
-;    month      = 1                  ; January
-;    smonth     = "Jan"
-;    start_years = (/1951,1961/)
-;    end_years   = (/1991,2001/)
-;    nyears      = dimsizes(start_years)
 
 ;---Read in temperature and convert to degrees C.
     t       = f->temp  ;南北纬5°平均
     t@units = "degC"
     t_ave   = f_ave->temp  ;南北纬5°平均
     t_ave@units = "degC"
+
 ;---Start the graphics
     wks  = gsn_open_wks("png","panel8")         ; send graphics to PNG file
 
     res                     = True
     res@gsnDraw             = False
     res@gsnFrame            = False
-    res@mpFillOn            = False            ; no need
-    res@mpCenterLonF        = -180.0
-
-    res@mpMaxLatF    = 20.                      ; specify the plot domain
-    res@mpMinLatF    = -20.                      ;
-    res@mpMinLonF    = 120.                     ;
-    res@mpMaxLonF    = 280.
+    res@gsnAddCyclic        = False
+    ; res@mpCenterLonF        = 180.0
 
     res@cnLevelSelectionMode= "ManualLevels"   ; manual set levels
     res@cnMinLevelValF      = -4.0
@@ -71,56 +51,32 @@ begin
     res@tiYAxisString       = "Depth"
     res@tiYAxisFontHeightF  = 0.05             ;Y轴名称字体大小
     res@trYReverse          = True             ;把纵轴倒过来，深度从小到大
+    res@tmXBLabelFontHeightF= 0.02    ;XY轴坐标标注字体大小
+    res@tmYLLabelFontHeightF= 0.02
 
     res@lbLabelBarOn        = False            ; turn off individual label bars
 
     res@gsnStringFontHeightF= 0.02
-    res@gsnLeftString       = "Depth"
-    res@gsnRightString      = t@units
+    ; res@gsnLeftString       = "Depth"
+    ; res@gsnRightString      = t@units
+    res@pmLegendDisplayMode = "Never"
 
 ;---Create arrays to hold series of plots
-    plots      = new(2*nmonths,graphic)
+    plots      = new(12, graphic)
 
-    do i=0, nmonths-1
 ;---Get data for start and end year of interest
-;     sy = ind(years.eq.start_years(i).and.months.eq.month)
-;     ey = ind(years.eq.end_years(i)  .and.months.eq.month)
+    del = t(:, 0:11, 83:108, 39:201) - t_ave(24:35, 0:11, 83:108, 39:201)
+    copy_VarCoords(t, del)
+    delta = dim_avg_n_Wrap(del, 2)
 
-;      diff = t(sy,:,:)                ; trick to copy  metadata
-;      diff = t(ey,:,:) - t(sy,:,:)    ; overwrite with diff values
+    do i=0, 11
 
-;      diff@long_name = end_years(i) + "-" + start_years(i) + \
-;                       " TS field differences"
-      sy = ind(months.eq.start_months(i))
-      ey = ind(months.eq.end_months(i))
-      print(sy)
-      print(ey)
-;---Debug prints
-      ; print("========================================")
-      ; t(i,:,:) = t(i,:,:)-t_ave(i+24,:,:)
-      ; t(i+6,:,:) = t(i+6,:,:)-t_ave(i+6+24,:,:)
-      ; printMinMax(t(sy,:,:),0)
-      ; printMinMax(t(ey,:,:),0)
-;      printMinMax(diff,0)
+;---Create plot
+     res@gsnCenterString = month_abbr(i)
+     res@gsnCenterStringFontHeightF=0.01      ;设定小图题目字体大小
 
-;---Create the two start/end year plots and the difference plot
-     ; sy = ind(months.eq.start_months(i))
-     ; ey = ind(months.eq.end_months(i))
-      res@gsnCenterString = month_abbr(start_months(i))
-      del_l = t(i, 0:11, 83:108, :) - t_ave(i+24, 0:11, 83:108, :)
-      copy_VarCoords(t, del_l)
-      delta_l = dim_avg_n_Wrap(del_l, 1)
-      plots(i*2) = gsn_csm_contour_map_ce(wks, delta_l, res)
+     plots(i)=gsn_csm_contour(wks, delta(i, :, :), res)
 
-      res@gsnCenterString = month_abbr(end_months(i))
-      del_r = t(i+6, 0:11, 83:108, :) - t_ave(i+6+24, 0:11, 83:108, :)
-      copy_VarCoords(t, del_r)
-      delta_r = dim_avg_n_Wrap(del_r, 1)
-      plots(i*2+1) = gsn_csm_contour_map_ce(wks, delta_r, res)
-
-;      dres@gsnCenterString = "Difference: " + smonth + " " + \
-;                             end_years(i) + "-" + start_years(i)
-;      diff_plots(i) = gsn_csm_contour_map_ce(wks, diff ,dres)
     end do
 
 ;---Resources for paneling
@@ -140,7 +96,7 @@ begin
 ; so they can "live" for the rest of this script, for
 ; when we maximize them later.
 ;
-    panelid1 = gsn_panel_return(wks,plots,(/nmonths,2/),pres)
+    panelid1 = gsn_panel_return(wks, plots, (/3,4/), pres)
 
 ;---Calculate location for top of difference plots
     bb     = NhlGetBB(panelid1)
