@@ -26,6 +26,7 @@ begin
     t@units = "degC"
     t_ave   = f_ave->sst
     t_ave@units = "degC"
+    
 ;---Start the graphics
     wks  = gsn_open_wks("png","panel6")         ; send graphics to PNG file
 

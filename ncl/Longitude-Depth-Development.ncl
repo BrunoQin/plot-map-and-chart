@@ -19,8 +19,7 @@ begin
     fname_ave = "/BIGDATA1/iocas_mmu_2/GFDL-CM2p1/output/00610101.ocean_month.nc"
     f_ave     = addfile(fname_ave, "r")
 
-    month_abbr = (/"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep", \
-                    "Oct","Nov","Dec"/)
+    month_abbr = (/"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"/)
 
 ;---Read in temperature and convert to degrees C.
     t       = f->temp  ;南北纬5°平均
