@@ -14,9 +14,9 @@
 
 begin
 ;---Open file
-    fname = "../CP_OPR/ocean/9_16_ocean.nc"
+    fname = "../1_16_ocean.nc"
     f     = addfile(fname, "r")
-    fname_ave = "/BIGDATA1/iocas_mmu_2/GFDL-CM2p1/output/00610101.ocean_month.nc"
+    fname_ave = "../data/63.nc"
     f_ave     = addfile(fname_ave, "r")
 
     month_abbr = (/"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"/)
@@ -26,7 +26,7 @@ begin
     t@units = "degC"
     t_ave   = f_ave->sst
     t_ave@units = "degC"
-    
+
 ;---Start the graphics
     wks  = gsn_open_wks("png","panel6")         ; send graphics to PNG file
 
@@ -88,7 +88,7 @@ begin
 ; so they can "live" for the rest of this script, for
 ; when we maximize them later.
 ;
-    panelid1 = gsn_panel_return(wks, plots, (/6,2/), pres)
+    panelid1 = gsn_panel_return(wks, plots, (/3, 4/), pres)
 
 ;---Calculate location for top of difference plots
     bb     = NhlGetBB(panelid1)

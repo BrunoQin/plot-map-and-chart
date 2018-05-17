@@ -19,17 +19,31 @@ MONTHS = {
     12: "Dec"
 }
 
-file_n = netCDF4.Dataset('/Users/Bruno/Desktop/3_29_ocean.nc')
+file_n = netCDF4.Dataset('/Users/Bruno/Desktop/1_16_ocean.nc')
 lat_n = file_n.variables['yt_ocean'][:]
 lon_n = file_n.variables['xt_ocean'][:]
 data_n = file_n.variables['sst'][:, :, :]
 file_n.close()
 
-file_s = netCDF4.Dataset('/Users/Bruno/Desktop/63.nc')
-lat_s = file_s.variables['yt_ocean'][:]
-lon_s = file_s.variables['xt_ocean'][:]
-data_s = file_s.variables['sst'][:, :, :]
-file_s.close()
+file_s = netCDF4.Dataset('/Users/Bruno/Desktop/sst_ave300Y.nc')
+# lat_s = file_s.variables['yt_ocean'][:]
+# lon_s = file_s.variables['xt_ocean'][:]
+# data_s = file_s.variables['sst'][:, :, :]
+
+SST_MONTHS = {
+    0: "sst_jan_ave",
+    1: "sst_feb_ave",
+    2: "sst_mar_ave",
+    3: "sst_april_ave",
+    4: "sst_may_ave",
+    5: "sst_june_ave",
+    6: "sst_july_ave",
+    7: "sst_agu_ave",
+    8: "sst_sep_ave",
+    9: "sst_oct_ave",
+    10: "sst_nov_ave",
+    11: "sst_dec_ave"
+}
 
 
 def plot_ssta(da, ax=None, shift=True):
@@ -57,8 +71,11 @@ fig = plt.figure(0, (20, 8))
 grid = ImageGrid(fig, 111, nrows_ncols=(3, 4), axes_pad=0.5, cbar_mode='single', cbar_location="right")
 for i in range(12):
     plt.sca(grid[i])
-    plot_ssta(data_n[i] - data_s[i])
+    data_s = file_s.variables[SST_MONTHS[i]][:, :]
+    plot_ssta(data_n[i] - data_s)
     plt.title(MONTHS[i+1])
+
+file_s.close()
 
 plt.colorbar(cax=grid[0].cax, orientation="vertical")
 plt.suptitle("SSTA Development")

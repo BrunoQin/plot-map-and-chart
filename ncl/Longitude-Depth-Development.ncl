@@ -14,7 +14,7 @@
 
 begin
 ;---Open file
-    fname = "../CP_OPR/ocean/9_16_ocean.nc"
+    fname = "../1_16_ocean.nc"
     f     = addfile(fname, "r")
     fname_ave = "/BIGDATA1/iocas_mmu_2/GFDL-CM2p1/output/00610101.ocean_month.nc"
     f_ave     = addfile(fname_ave, "r")

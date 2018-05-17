@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import netCDF4
 
-file_n = netCDF4.Dataset('/Users/Bruno/Desktop/4_21_ocean.nc')
+file_n = netCDF4.Dataset('/Users/Bruno/Desktop/2_16_ocean.nc')
 data_n = file_n.variables['temp'][:, 0, :, :]
 file_n.close()
 
