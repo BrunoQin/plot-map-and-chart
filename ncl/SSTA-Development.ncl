@@ -14,21 +14,21 @@
 
 begin
 ;---Open file
-    fname = "../1_16_ocean.nc"
+    fname = "../6_26_ocean.nc"
     f     = addfile(fname, "r")
-    fname_ave = "../data/63.nc"
+    fname_ave = "../data/sst_ave300Y.nc"
     f_ave     = addfile(fname_ave, "r")
-
+    month     = ((/"sst_jan_ave", "sst_feb_ave", "sst_mar_ave", "sst_april_ave", "sst_may_ave", "sst_june_ave", "sst_july_ave", "sst_agu_ave", "sst_sep_ave", "sst_oct_ave", "sst_nov_ave", "sst_dec_ave"/))
     month_abbr = (/"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"/)
 
 ;---Read in temperature and convert to degrees C.
     t       = f->sst
     t@units = "degC"
-    t_ave   = f_ave->sst
-    t_ave@units = "degC"
+    ; t_ave   = f_ave->sst
+    ; t_ave@units = "degC"
 
 ;---Start the graphics
-    wks  = gsn_open_wks("png","panel6")         ; send graphics to PNG file
+    wks  = gsn_open_wks("png","panel6.26")         ; send graphics to PNG file
 
     res                     = True
     res@gsnDraw             = False
@@ -60,11 +60,13 @@ begin
 ;---Create arrays to hold series of plots
     plots      = new(12, graphic)
 
-;---Get data for start and end year of interest
-    t(:, :, :) = t(:, :, :) - t_ave(24:35, :, :)
+
 
     do i=0, 11
-
+;---Get data for start and end year of interest
+      t_ave   = f_ave->$month(i)$
+      t_ave@units = "degC"
+      t(i, :, :) = t(i, :, :) - t_ave(:, :)
 ;---Create the two start/end year plots and the difference plot
       res@gsnCenterString = month_abbr(i)
       plots(i) = gsn_csm_contour_map_ce(wks, t(i, :, :), res)
