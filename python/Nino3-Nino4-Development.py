@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import netCDF4
 
-file_n = netCDF4.Dataset('/Users/Bruno/Desktop/2_16_ocean.nc')
+file_n = netCDF4.Dataset('/Users/Bruno/Desktop/0_3_ocean.nc')
 data_n = file_n.variables['temp'][:, 0, :, :]
 file_n.close()
 
@@ -43,11 +43,11 @@ plt.ylabel('index')
 
 x = range(12)
 
-plt.plot(x, nino3, 'r', label='nino3 index')
-plt.plot(x, nino4, 'b', label='nino4 index')
+plt.plot(x, nino3, 'b', label='nino3 index')
+plt.plot(x, nino4, 'r--', label='nino4 index')
 plt.xticks(x, group_labels, rotation=45)
 
-plt.axhline(0.5, color='r', linestyle="--")
+plt.axhline(0.5, color='black')
 # plt.axhline(-0.5, color='r', linestyle="--")
 
 plt.legend(bbox_to_anchor=[0.3, 1])

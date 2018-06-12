@@ -14,7 +14,7 @@
 
 begin
 ;---Open file
-    fname = "../6_26_ocean.nc"
+    fname = "../0_14_ocean.nc"
     f     = addfile(fname, "r")
     fname_ave = "../data/sst_ave300Y.nc"
     f_ave     = addfile(fname_ave, "r")
@@ -28,7 +28,7 @@ begin
     ; t_ave@units = "degC"
 
 ;---Start the graphics
-    wks  = gsn_open_wks("png","panel6.26")         ; send graphics to PNG file
+    wks  = gsn_open_wks("png","panel0.14")         ; send graphics to PNG file
 
     res                     = True
     res@gsnDraw             = False

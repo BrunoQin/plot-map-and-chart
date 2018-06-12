@@ -4,7 +4,7 @@ from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 import netCDF4
 
-file = netCDF4.Dataset('/Users/Bruno/Desktop/ocean_temp_salt_6.nc')
+file = netCDF4.Dataset('/Users/Bruno/Desktop/ocean_temp_salt_0.nc')
 lat = file.variables['yaxis_1'][:]
 lon = file.variables['xaxis_1'][:]
 data = file.variables['temp'][0, 0, :, :]
