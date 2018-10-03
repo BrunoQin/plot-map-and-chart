@@ -11,12 +11,12 @@ ratio = [80.02, 81.35, 82.34, 82.90, 83.35, 84.03, 85.08, 85.79, 86.78, 87.21,
 steps = np.array(range(40)) + 1
 
 
-plt.title('Adaption value development')
+plt.title('Adaption value ratio development')
 plt.xlabel('step')
 plt.ylabel('adaption value')
 plt.xticks(steps, steps)
 
-plt.plot(steps, ratio, 'b', label='adaption value')
+plt.plot(steps, ratio, 'b', label='adaption value ratio')
 
 
 # plt.legend(bbox_to_anchor=[0.3, 1])

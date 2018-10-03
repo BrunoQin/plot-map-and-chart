@@ -27,16 +27,16 @@ d1 = np.array(d1)
 d2 = np.array(d2)
 
 all_data = np.array([d1, d2]).reshape(1200, 2)
-labels = ['x1', 'x2']
+labels = ['PSO', 'DFSPSO']
 
 bplot = plt.boxplot(all_data, patch_artist=True, labels=labels)  # 设置箱型图可填充
-plt.title('Rectangular box plot')
+plt.title('Convergence adaption value rectangular box plot')
 
 colors = ['pink', 'lightblue'] #, 'lightgreen']
 for patch, color in zip(bplot['boxes'], colors):
     patch.set_facecolor(color)  # 为不同的箱型图填充不同的颜色
 
 # plt.grid(True, axis=1)
-plt.xlabel('Two separate samples')
-plt.ylabel('Observed values')
+# plt.xlabel('Two separate samples')
+plt.ylabel('Convergence adaption value')
 plt.show()

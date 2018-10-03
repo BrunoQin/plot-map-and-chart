@@ -32,10 +32,10 @@ plt.xlabel('step')
 plt.ylabel('adaption value degree change')
 plt.xticks(steps, steps)
 
-plt.plot(steps, dfspso_degree, 'b', label='adaption value degree')
-plt.plot(steps, pso_degree, 'r', label='adaption value degree')
+plt.plot(steps, dfspso_degree, 'b', label='DFSPSO adaption value degree')
+plt.plot(steps, pso_degree, 'r', label='PSO adaption value degree')
 
 
 plt.legend(bbox_to_anchor=[0.3, 1])
-plt.grid()
+# plt.grid()
 plt.show()
