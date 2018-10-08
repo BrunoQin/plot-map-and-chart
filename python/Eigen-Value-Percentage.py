@@ -11,6 +11,7 @@ for line in open("../file/s.txt"):
 
 for i in range(len(sum)):
     sum[i] = sum[i] / tem
+    print(sum[i], i)
 
 steps = np.array(range(len(values))) + 1
 

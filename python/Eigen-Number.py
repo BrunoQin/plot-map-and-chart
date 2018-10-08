@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 steps = [60, 70, 80, 90]
-convergence_step = [19, 18, 17, 14]
+convergence_step = [19.4, 18.2, 17.3, 15]
 num_eigen = [84, 119, 165, 221]
 
 
