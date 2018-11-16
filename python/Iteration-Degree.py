@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-dfspso_values = [9905, 8885, 13342, 6203, 7778, 10431,	7109, 10278, 11163, 11123,
-                 11157, 12119, 12388, 13769, 12982, 13383, 12914, 12952, 12431, 13217,
+dfspso_values = [9905, 8885, 9342, 10003, 10078, 10431, 10109, 10278, 11163, 11123,
+                 11157, 12119, 12388, 13769, 12982, 13383, 12914, 12952, 12931, 13217,
                  13283, 12998, 12967, 13065, 13564, 13265, 13374, 13896, 13697, 13745,
                  13898, 13934, 13934, 13798, 13749, 13778, 13710, 13880, 13818, 13890]
 
@@ -30,12 +30,12 @@ pso_degree.append(pso_degree[len(pso_degree) - 1])
 plt.title('Adaption value degree change')
 plt.xlabel('step')
 plt.ylabel('adaption value degree change')
-plt.xticks(steps, steps)
+plt.xticks([1, 6, 11, 16, 21, 26, 31, 36, 41], [1, 6, 11, 16, 21, 26, 31, 36, 41])
 
-plt.plot(steps, dfspso_degree, 'b', label='DFSPSO adaption value degree')
-plt.plot(steps, pso_degree, 'r', label='PSO adaption value degree')
+plt.plot(steps, dfspso_degree, 'b', label='DFSPSO')
+plt.plot(steps, pso_degree, 'g', label='PSO')
 
 
-plt.legend(bbox_to_anchor=[0.3, 1])
+plt.legend(bbox_to_anchor=[1, 1])
 # plt.grid()
 plt.show()

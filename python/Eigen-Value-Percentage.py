@@ -26,6 +26,6 @@ ax1.set_title("eigen value and cumulative percentage")
 ax2 = ax1.twinx()  # this is the important function
 ax2.plot(steps, sum, 'r')
 ax2.set_ylabel('cumulative percentage')
-ax2.axhline(0.95, color='green', linestyle="--")
+ax2.axhline(0.8, color='green', linestyle="--")
 
 plt.show()
