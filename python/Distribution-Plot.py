@@ -6,8 +6,10 @@ import numpy as np
 # 12000-12500, 12500-13000, 13000-13500
 
 
-d1 = [49, 59, 63, 67, 72, 103, 94, 52, 44, 39, 87, 91, 88, 77, 47, 45, 29, 39, 30, 13, 6, 6, 0]
-d2 = [38, 53, 48, 49, 50, 55, 49, 49, 42, 48, 89, 98, 110, 92, 62, 51, 41, 42, 49, 47, 17, 12, 9]
+d1 = [29, 39, 63, 87, 102, 113, 94, 52, 44, 57, 69, 71,
+      88, 91, 77, 65, 49, 0, 0, 0, 0, 0, 0]
+d2 = [0, 1, 2, 1, 2, 2, 3, 5, 22, 38, 44, 52,
+      68, 80, 91, 101, 116, 120, 116, 114, 97, 79, 34]
 
 values1 = []
 values2 = []
@@ -46,10 +48,10 @@ overlaid_histogram(data1=np.array(d1),
                    data1_name='PSO',
                    data1_color='#539caf',
                    data2=np.array(d2),
-                   data2_name='DFSPSO',
+                   data2_name='DPSO',
                    data2_color='#7663b0',
                    x_label='adaption value',
                    y_label='Frequency',
-                   title='Distribution of adaption value for two different algorithm')
+                   title='Distribution of last iteration adaption values for two different algorithm')
 
 plt.show()

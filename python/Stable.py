@@ -6,8 +6,8 @@ import random
 # 11200-11900, 11900-12600, 12600-13300, 13300-14000,
 
 
-d1 = [0, 13, 25, 36, 33, 20, 16, 12, 8, 0]
-d2 = [0, 0, 7, 16, 27, 32, 35, 20, 18, 7]
+d1 = [3, 17, 29, 39, 33, 26, 16, 0, 0, 0]
+d2 = [0, 0, 0, 0, 0, 21, 37, 46, 31, 27]
 
 values1 = []
 values2 = []
@@ -17,17 +17,17 @@ for i in range(len(d1)):
 
 for i in range(len(d2)):
     for j in range(d2[i]):
-        values2.append((7000 + 700 * i) + random.randint(0, 699))
+        values2.append((8100 + 700 * i) + random.randint(0, 699))
 
 
 d1 = np.array(values1)
 d2 = np.array(values2)
 
 all_data = np.array([d1, d2]).T
-labels = ['PSO', 'DFSPSO']
+labels = ['PSO', 'DPPSO']
 
 bplot = plt.boxplot(all_data, patch_artist=True, labels=labels)  # 设置箱型图可填充
-plt.title('Convergence adaption value rectangular box plot')
+plt.title('Convergence adaption value box plot')
 
 colors = ['pink', 'lightblue'] #, 'lightgreen']
 for patch, color in zip(bplot['boxes'], colors):
