@@ -45,13 +45,13 @@ def overlaid_histogram(data1, data1_name, data1_color, data2, data2_name, data2_
 
 # Call the function to create plot
 overlaid_histogram(data1=np.array(d1),
-                   data1_name='PSO',
+                   data1_name='PPSO',
                    data1_color='#539caf',
                    data2=np.array(d2),
-                   data2_name='DPSO',
+                   data2_name='DPPSO',
                    data2_color='#7663b0',
-                   x_label='adaption value',
-                   y_label='Frequency',
-                   title='Distribution of last iteration adaption values for two different algorithm')
+                   x_label='Adaption value',
+                   y_label='Number of particles',
+                   title='Distribution of the adaption values')
 
 plt.show()

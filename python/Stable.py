@@ -24,10 +24,10 @@ d1 = np.array(values1)
 d2 = np.array(values2)
 
 all_data = np.array([d1, d2]).T
-labels = ['PSO', 'DPPSO']
+labels = ['PPSO', 'DPPSO']
 
 bplot = plt.boxplot(all_data, patch_artist=True, labels=labels)  # 设置箱型图可填充
-plt.title('Convergence adaption value box plot')
+plt.title('Maximum adaption values')
 
 colors = ['pink', 'lightblue'] #, 'lightgreen']
 for patch, color in zip(bplot['boxes'], colors):
@@ -35,5 +35,5 @@ for patch, color in zip(bplot['boxes'], colors):
 
 # plt.grid(True, axis=1)
 # plt.xlabel('Two separate samples')
-plt.ylabel('Convergence adaption value')
+plt.ylabel('Maximum adaption values ')
 plt.show()

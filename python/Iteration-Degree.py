@@ -27,13 +27,13 @@ for i in range(len(pso_values) - 1):
 
 pso_degree.append(pso_degree[len(pso_degree) - 1])
 
-plt.title('Adaption value degree change')
-plt.xlabel('step')
-plt.ylabel('adaption value degree change')
+plt.title('Absolute value of the difference between two adjacent steps')
+plt.xlabel('Step')
+plt.ylabel('Absolute value')
 plt.xticks([1, 6, 11, 16, 21, 26, 31, 36, 41], [1, 6, 11, 16, 21, 26, 31, 36, 41])
 
-plt.plot(steps, dfspso_degree, 'b', label='DFSPSO')
-plt.plot(steps, pso_degree, 'g', label='PSO')
+plt.plot(steps, dfspso_degree, 'b', label='DPPSO')
+plt.plot(steps, pso_degree, 'g', label='PPSO')
 
 
 plt.legend(bbox_to_anchor=[1, 1])

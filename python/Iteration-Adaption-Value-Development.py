@@ -15,13 +15,13 @@ pso_values = [6067, 9719, 7642, 6002, 9406, 6646, 8190, 9801, 12673, 8858,
 steps = np.array(range(40)) + 1
 
 
-plt.title('Adaption value development')
-plt.xlabel('step')
+plt.title('Average maximum adaption value development')
+plt.xlabel('Step')
 plt.xticks([1, 6, 11, 16, 21, 26, 31, 36, 41], [1, 6, 11, 16, 21, 26, 31, 36, 41])
-plt.ylabel('adaption value')
+plt.ylabel('Adaption value')
 
-plt.plot(steps, dfspso_values, 'b', label='DFSPSO')
-plt.plot(steps, pso_values, 'g', label='PSO')
+plt.plot(steps, dfspso_values, 'b', label='DPPSO')
+plt.plot(steps, pso_values, 'g', label='PPSO')
 
 
 plt.legend(bbox_to_anchor=[0.25, 1])

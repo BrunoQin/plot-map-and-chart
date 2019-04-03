@@ -11,10 +11,10 @@ ratio = [80.02, 81.35, 82.34, 82.90, 83.35, 84.03, 85.08, 85.79, 86.78, 87.21,
 steps = np.array(range(40)) + 1
 
 
-plt.title('Adaption value ratio development')
+plt.title('Accumulative ratio development')
 plt.xticks([1, 6, 11, 16, 21, 26, 31, 36, 41], [1, 6, 11, 16, 21, 26, 31, 36, 41])
-plt.xlabel('step')
-plt.ylabel('adaption value')
+plt.xlabel('Step')
+plt.ylabel('Accumulative ratio ')
 
 plt.plot(steps, ratio, 'g', label='adaption value ratio')
 

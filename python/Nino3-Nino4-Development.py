@@ -39,7 +39,7 @@ file_s.close()
 group_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 plt.title('Nino3 & Nino4 index development')
 plt.xlabel('Month')
-plt.ylabel('index')
+plt.ylabel('Index')
 
 x = range(12)
 

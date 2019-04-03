@@ -20,12 +20,13 @@ fig = plt.figure()
 
 ax1 = fig.add_subplot(111)
 ax1.plot(steps, values, 'b', label='eigen value')
-ax1.set_ylabel('eigen value')
-ax1.set_title("eigen value and cumulative percentage")
+ax1.set_ylabel('Eigen value')
+ax1.set_title("Eigen value and accumulative ratio")
+ax1.set_xlabel('Number of Eigen value')
 
 ax2 = ax1.twinx()  # this is the important function
 ax2.plot(steps, sum, 'r')
-ax2.set_ylabel('cumulative percentage')
-ax2.axhline(0.95, color='green', linestyle="--")
+ax2.set_ylabel('Accumulative ratio')
+ax2.axhline(0.8, color='green', linestyle="--")
 
 plt.show()
