@@ -28,7 +28,7 @@ begin
     ; t_ave@units = "degC"
 
 ;---Start the graphics
-    wks  = gsn_open_wks("png","tesppppp")         ; send graphics to PNG file
+    wks  = gsn_open_wks("png","SSTA-3-23")         ; send graphics to PNG file
 
     res                     = True
     res@gsnDraw             = False
