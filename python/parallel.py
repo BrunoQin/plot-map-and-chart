@@ -45,7 +45,6 @@ for i in range(30):
             july_data.append(temp)
 july_data = np.array(july_data)
 july_data = np.reshape(july_data, (-1, 330)).T
-print(july_data.shape)
 
 oct = []
 for line in open("../file/best-oct.txt"):
@@ -87,7 +86,6 @@ for i in range(30):
             oct_data.append(temp)
 oct_data = np.array(oct_data)
 oct_data = np.reshape(oct_data, (-1, 330)).T
-print(oct_data.shape)
 
 jan = []
 for line in open("../file/best-jan.txt"):
@@ -133,7 +131,6 @@ for i in range(30):
             jan_data.append(temp)
 jan_data = np.array(jan_data)
 jan_data = np.reshape(jan_data, (-1, 330)).T
-print(jan_data.shape)
 
 apr = []
 for line in open("../file/best-apr.txt"):
@@ -175,7 +172,6 @@ for i in range(30):
             apr_data.append(temp)
 apr_data = np.array(apr_data)
 apr_data = np.reshape(apr_data, (-1, 330)).T
-print(apr_data.shape)
 
 july = np.array(july)
 july = np.reshape(july, (-1, 30)).T
@@ -203,36 +199,79 @@ apr = np.reshape(apr, (1, -1))
 
 # july, oct, jan, apr, july_data, oct_data, jan_data, apr_data
 
-data = np.hstack((july_data, oct_data))
-data = np.hstack((data, jan_data))
-data = np.hstack((data, apr_data))
-data = data.T
+print(july.shape)
+print(oct.shape)
+print(jan.shape)
+print(apr.shape)
+
+print(july_data.shape)
+print(oct_data.shape)
+print(jan_data.shape)
+print(apr_data.shape)
+
+
+data = None
+percentage = 0.6
+print(np.max(july))
+print(np.max(oct))
+print(np.max(jan))
+print(np.max(apr))
+for i in range(180):
+    if july[0, i] / np.max(july) >= percentage:
+        if data is None:
+            data = np.array(july_data[:, i:(i+1)])
+        else:
+            data = np.hstack((data, july_data[:, i:(i+1)]))
+
+for i in range(180):
+    if oct[0, i] / np.max(oct) >= percentage:
+        if data is None:
+            data = np.array(oct_data[:, i:(i+1)])
+        else:
+            data = np.hstack((data, oct_data[:, i:(i+1)]))
+
+for i in range(400):
+    if jan[0, i] / np.max(jan) >= percentage:
+        if data is None:
+            data = np.array(jan_data[:, i:(i+1)])
+        else:
+            data = np.hstack((data, jan_data[:, i:(i+1)]))
+
+for i in range(190):
+    if apr[0, i] / np.max(apr) >= percentage:
+        if data is None:
+            data = np.array(apr_data[:, i:(i+1)])
+        else:
+            data = np.hstack((data, apr_data[:, i:(i+1)]))
+
 print(data.shape)
 
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from mpl_toolkits.mplot3d import Axes3D
-y_pred = KMeans(n_clusters=2, random_state=9).fit_predict(data)
-pca = PCA(n_components=2)
+from pandas import Series, DataFrame
+
+data = data.T
+df2 = DataFrame(data[:, 0:10], index=range(len(data)),
+               columns=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+df2.to_csv('../file/fakedata-60.txt', sep='\t', index=True)
+print(df2)
+
+# y_pred = KMeans(n_clusters=2, random_state=9).fit_predict(data)
+pca = PCA(n_components=10)
 pca.fit(data)
 data = pca.transform(data)
 
-fig = plt.figure()
-# ax = Axes3D(fig)
-print(data[437])
-print(data[180])
-plt.scatter(data[:, 0], data[:, 1], c=y_pred)
-y_pred = np.array(y_pred)
-y_pred = np.reshape(y_pred, (-1, 1))
+print(data.shape)
 
-for i in range(950):
-    if data[i, 0] >= 200:
-        i = i - 360
-        m = int(i / 30)
-        n = i- m * 30 - 1
-        print(i, m, n)
 
-# print(y_pred[361:760])
-plt.show()
+
+df = DataFrame(data, index=range(len(data)),
+               columns=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+
+df.to_csv('../file/data-60.txt', sep='\t', index=True)
+print(df)
+
+
 

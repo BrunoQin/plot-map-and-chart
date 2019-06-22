@@ -14,7 +14,7 @@
 
 begin
 ;---Open file
-    fname = "/BIGDATA1/iocas_mmu_2/PPSO_qin/record/cp-APR/4_28_ocean.nc"
+    fname = "/BIGDATA1/iocas_mmu_2/PPSO_qin/record/cp-OCT/4_28_ocean.nc"
     f     = addfile(fname, "r")
     fname_ave_p = "/BIGDATA1/iocas_mmu_2/GFDL-CM2p1/output/04210101.ocean_month.nc"
     fname_ave_n = "/BIGDATA1/iocas_mmu_2/GFDL-CM2p1/output/04260101.ocean_month.nc"
@@ -32,7 +32,7 @@ begin
     t_ave_n@units = "degC"
 
 ;---Start the graphics
-    wks  = gsn_open_wks("png","4_28")         ; send graphics to PNG file
+    wks  = gsn_open_wks("png","CNOP_LL_oct.4_28")         ; send graphics to PNG file
 
     res                     = True
     res@gsnDraw             = False
@@ -68,25 +68,25 @@ begin
     plots      = new(12, graphic)
 
 ;---Get data for start and end year of interest
-;    del1 = t(0:2, 0:11, 83:108, 39:201) - t_ave_p(57:59, 0:11, 83:108, 39:201)
-    del2 = t(0:11, 0:11, 83:108, 39:201) - t_ave_n(3:14, 0:11, 83:108, 39:201)
-;    copy_VarCoords(t, del1)
+    del1 = t(0:2, 0:11, 83:108, 39:201) - t_ave_p(57:59, 0:11, 83:108, 39:201)
+    del2 = t(0:8, 0:11, 83:108, 39:201) - t_ave_n(0:8, 0:11, 83:108, 39:201)
+    copy_VarCoords(t, del1)
     copy_VarCoords(t, del2)
-;    delta1 = dim_avg_n_Wrap(del1, 2)
+    delta1 = dim_avg_n_Wrap(del1, 2)
     delta2 = dim_avg_n_Wrap(del2, 2)
 
-;    do i=0, 2
-;---Create plot
-;     res@gsnCenterString = month_abbr(i)
-;     res@gsnCenterStringFontHeightF=0.01      ;设定小图题目字体大小
-;     plots(i)=gsn_csm_contour(wks, delta1(i, :, :), res)
-;    end do
-
-    do i=0, 11
+    do i=0, 2
     ;---Create plot
      res@gsnCenterString = month_abbr(i)
      res@gsnCenterStringFontHeightF=0.01      ;设定小图题目字体大小
-     plots(i)=gsn_csm_contour(wks, delta2(i, :, :), res)
+     plots(i)=gsn_csm_contour(wks, delta1(i, :, :), res)
+    end do
+
+    do i=0, 8
+    ;---Create plot
+     res@gsnCenterString = month_abbr(i+3)
+     res@gsnCenterStringFontHeightF=0.01      ;设定小图题目字体大小
+     plots(i+3)=gsn_csm_contour(wks, delta2(i, :, :), res)
     end do
 
 ;---Resources for paneling
